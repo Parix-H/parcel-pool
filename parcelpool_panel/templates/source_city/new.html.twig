@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SourceCity{% endblock %}
+
+{% block body %}
+    <h1>Create new SourceCity</h1>
+
+    {{ include('source_city/_form.html.twig') }}
+
+    <a href="{{ path('source_city_index') }}">back to list</a>
+{% endblock %}

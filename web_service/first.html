@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Parcel Pool | Show Pools</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Web Manifest -->
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="css/css.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/css/uikit.min.css">
+
+    <!-- UIkit JS -->
+    <script src="js/parcel_pool.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.5/js/uikit-icons.min.js" defer></script>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <!-- <li><a href="#" id="showpoolbtn">Search For Parcel Pools</a></li> -->
+            <li><a href="#" id="loginbtn">Login</a></li>
+            <li><a href="#" id="signupbtn">Sign Up</a></li>
+            <li><a href="#" id="logoutbtn">Log Out</a></li>
+        </ul>
+    </nav>
+    <div class="uk-container uk-container-small uk-flex-auto uk-text-center" data-uk-scrollspy="target: > .animate; cls: uk-animation-slide-bottom-small uk-invisible; delay: 300">
+        <div class="uk-margin-medium-top animate uk-invisible" data-uk-margin data-uk-scrollspy-class="uk-animation-fade uk-invisible">
+            <a class="uk-button uk-button-primary uk-button-large uk-width-2-3 uk-width-auto@s" title="Search For Parcel Pools"
+                id="showpoolbtn">Find A Parcel Pool</a>
+        </div>
+    </div>
+    <section id="usersession"></section>
+    <section id="mainoutput"></section>
+    <section id="result"></section>
+
+    <script id="logincomponent" type="text/template">
+        <div class="uk-width-1-1">
+            <div class="uk-container">
+                <div class="uk-grid-margin uk-grid uk-grid-stack" uk-grid>
+                    <div class="uk-width-5-6 uk-margin-auto">
+                        <div class="uk-card uk-card-default uk-card-large uk-grid-collapse uk-child-width-1-1@s uk-margin uk-border-rounded" uk-grid>
+                            <div class="uk-card-body">
+                                <h3 class="uk-card-title uk-text-bold uk-text-uppercase uk-text-primary">Login Form</h3>
+                                <form action="#" novalidate id="loginform" class="uk-grid-small uk-form-stacked" uk-grid>
+                                    <fieldset class="uk-fieldset uk-width-1-1">
+                                        <div class="uk-margin uk-form-row">
+                                            <label for="email" class="uk-form-label uk-margin">
+                                                E-mail
+                                                <span class="uk-text-danger"> *</span>
+                                            </label>
+                                            <div class="uk-margin uk-form-controls">
+                                                <input id="email" class="uk-input uk-form-width-small uk-width-1-1" type="email" placeholder="E-mail" required>
+                                            </div>
+                                        </div>
+                                        <div class="uk-margin uk-form-row">
+                                            <label for="password" class="uk-form-label uk-margin">
+                                                Password
+                                                <span class="uk-text-danger"> *</span>
+                                            </label>
+                                            <div class="uk-form-password uk-margin uk-form-controls">
+                                                    <input id="pass" class="uk-input uk-form-width-small uk-width-1-1" type="password" placeholder="Password" required>
+                                            </div>
+                                            <div class="uk-margin">
+                                                <button value="Login" onclick="login()" id="logintoapp" class="uk-button uk-button-primary uk-button-small uk-width-1-1 uk-margin-small-bottom">Login</button>
+                                            </div>
+                                            <div class="uk-text-small uk-text-center">
+                                                Not registered? <a href="#" onclick="showsignupcomponent()">Create an account</a>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+
+    <script id="showpoolscomponent" type="text/template">
+        <div class="uk-width-1-1">
+            <div class="uk-container">
+                <div class="uk-grid-margin uk-grid uk-grid-stack" uk-grid>
+                    <div class="uk-width-5-6 uk-margin-auto">
+                        <div class="uk-card uk-card-default uk-card-large uk-grid-collapse uk-child-width-1-1@s uk-margin uk-border-rounded" uk-grid>
+                            <div class="uk-card-body">
+                                <h3 class="uk-card-title uk-text-bold uk-text-uppercase uk-text-primary">Find A Parcel Pool</h3>
+                                <form action="#" novalidate id="showpoolsform" class="uk-grid-small" uk-grid>
+                                    <fieldset class="uk-fieldset uk-form-stacked uk-width-1-1">
+                                        <div class="uk-margin">
+                                            <label for="from" class="uk-form-label uk-margin">From City</label>
+                                            <div uk-form-custom="target: > * > span:first-child" class="uk-form-controls">
+                                                <select name="from" id="from" class="uk-select uk-form-small uk-width-1-1">
+                                                    <option value="from">From</option>
+                                                </select>
+                                                <button class="uk-button uk-button-default" type="button" tabindex="-1">
+                                                    <span></span>
+                                                    <span uk-icon="icon: chevron-down"></span>
+                                                </button>
+                                            </div>
+                                            <label for="to" class="uk-form-label uk-margin">To City</label>
+                                            <div uk-form-custom="target: > * > span:first-child" class="uk-form-controls">
+                                                <select name="to" id="to" class="uk-select uk-form-small uk-width-1-1">
+                                                    <option value="to">To</option>
+                                                </select>
+                                                <button class="uk-button uk-button-default" type="button" tabindex="-1">
+                                                    <span></span>
+                                                    <span uk-icon="icon: chevron-down"></span>
+                                                </button>
+                                            </div>
+                                            <div class="uk-margin">
+                                                <button value="Show Pools" onclick="showPools()" id="searchForPools" class="uk-button uk-button-primary uk-button-small uk-width-1-1 uk-margin-small-bottom" type="button">Show
+                                                    Pools</button>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script id="poolslistcomponent" type="text/template">
+        <div>{{pools}}</div>
+    </script>
+
+    <script id="addparcelcomponent" type="text/template">
+            <div class="uk-width-1-1">
+                <div class="uk-container">
+                    <div class="uk-grid-margin uk-grid uk-grid-stack" uk-grid>
+                        <div class="uk-width-5-6 uk-margin-auto">
+                            <div class="uk-card uk-card-default uk-card-large uk-grid-collapse uk-child-width-1-1@s uk-margin uk-border-rounded" uk-grid>
+                                    <div class="uk-card-body">
+                                        <h3 class="uk-card-title uk-text-bold uk-text-uppercase uk-text-primary">Add Your Parcel</h3>
+                                        <form>
+                                            <div class="uk-margin">
+                                                <label class="uk-form-label" for="form-stacked-text">From</label>
+                                                <div class="uk-form-controls">
+                                                    <input class="uk-input" id="from" type="text" placeholder="From" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="uk-margin">
+                                                <label class="uk-form-label" for="form-stacked-text">To</label>
+                                                <div class="uk-form-controls">
+                                                    <input class="uk-input" id="to" type="text" placeholder="To" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="uk-margin">
+                                                <label class="uk-form-label" for="weight">Weight</label>
+                                                <div class="uk-form-controls">
+                                                    <input class="uk-input" id="weight" type="number" placeholder="kg">
+                                                </div>
+                                            </div>
+                                            <div class="uk-margin">
+                                                <div class="uk-form-controls">
+                                                    <label><input class="uk-checkbox uk-margin-small-right" type="checkbox"><small>Accept our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</small></label>
+                                                </div>
+                                            </div>
+                                            <div class="uk-margin">
+                                                <div class="uk-form-controls">
+                                                    <button class="uk-button uk-button-primary" type="button" id="addtheparcel" onclick="addParcel()">Add Parcel</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </script>
+
+    <script id="signupcomponent" type="text/template">
+        <div class="uk-width-1-1">
+            <div class="uk-container">
+                <div class="uk-grid-margin uk-grid uk-grid-stack" uk-grid>
+                    <div class="uk-width-5-6 uk-margin-auto">
+                        <div class="uk-card uk-card-default uk-card-large uk-grid-collapse uk-child-width-1-1@s uk-margin uk-border-rounded" uk-grid>
+                            <div class="uk-card-body">
+                                <h3 class="uk-card-title uk-text-bold uk-text-uppercase uk-text-primary">Create Your Account</h3>
+                                <form>
+                                    <div class="uk-margin">
+                                        <label class="uk-form-label" for="fname">First Name</label>
+                                        <div class="uk-form-controls">
+                                            <input class="uk-input" id="fname" type="text" placeholder="First Name">
+                                        </div>
+                                    </div>
+                                    <div class="uk-margin">
+                                        <label class="uk-form-label" for="lname">Last Name</label>
+                                        <div class="uk-form-controls">
+                                            <input class="uk-input" id="lname" type="text" placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                    <div class="uk-margin">
+                                        <label class="uk-form-label" for="email">E-mail</label>
+                                        <div class="uk-form-controls">
+                                            <input class="uk-input" id="email" type="email" placeholder="email@domain.com">
+                                        </div>
+                                    </div>
+                                    <div class="uk-margin">
+                                        <label class="uk-form-label" for="pass">Password</label>
+                                        <div class="uk-form-controls">
+                                            <input class="uk-input" id="pass" type="password" placeholder="">
+                                        </div>
+                                        <small class="uk-flex uk-flex-middle uk-margin-small-top">Minimum 6 characters, at least one letter and one number.</small>
+                                    </div>
+                                    <div class="uk-margin">
+                                        <div class="uk-form-controls">
+                                            <label><input class="uk-checkbox uk-margin-small-right" type="checkbox"><small>Accept our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</small></label>
+                                        </div>
+                                    </div>
+                                    <div class="uk-margin">
+                                        <div class="uk-form-controls">
+                                            <button class="uk-button uk-button-primary" type="button" id="register" onclick="signUp()">Create Account</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+</body>
+
+</html>

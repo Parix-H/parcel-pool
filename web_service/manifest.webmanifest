@@ -1,0 +1,12 @@
+{
+  "name": "ParcelPool",
+  "short_name": "ParcelPool",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#B49C9D",
+  "description": "A carpool for parcels.",
+  "icons": [{
+    "src": "img/logo.png",
+    "type": "image/png"
+  }]
+}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DestinationCity index{% endblock %}
+
+{% block body %}
+    <h1>DestinationCity index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DestinationCity</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for destination_city in destination_cities %}
+            <tr>
+                <td>{{ destination_city.id }}</td>
+                <td>{{ destination_city.destinationCity }}</td>
+                <td>
+                    <a href="{{ path('destination_city_show', {'id': destination_city.id}) }}">show</a>
+                    <a href="{{ path('destination_city_edit', {'id': destination_city.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('destination_city_new') }}">Create new</a>
+{% endblock %}

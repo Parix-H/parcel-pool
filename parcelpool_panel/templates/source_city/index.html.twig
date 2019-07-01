@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SourceCity index{% endblock %}
+
+{% block body %}
+    <h1>SourceCity index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>SourceCity</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for source_city in source_cities %}
+            <tr>
+                <td>{{ source_city.id }}</td>
+                <td>{{ source_city.sourceCity }}</td>
+                <td>
+                    <a href="{{ path('source_city_show', {'id': source_city.id}) }}">show</a>
+                    <a href="{{ path('source_city_edit', {'id': source_city.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('source_city_new') }}">Create new</a>
+{% endblock %}

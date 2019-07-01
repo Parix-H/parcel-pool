@@ -1,0 +1,8 @@
+body {
+    background-color: bisque;
+    padding: 1em 4em;
+}
+
+label, input, button {
+    display: block;
+}
